@@ -7,27 +7,27 @@ $onlyIf[$sum[$getUserVar[curbal];-$message[2]]>-1;Sorry, you dont seem to have t
 !balance]
 $let[bc;$awaitButton[Which CD would you like to buy? We have a 3-month CD with a 4.0% Monthly Percentage Yield (MPY) or a 6-month CD with a 5.0% MPY.{button:3-Month CD, 4.0% MPY:GREEN::3m}{button:6-Month CD, 5.0% MPY:BLUE::6m};;30s;3m;6m]]
 $if[$get[bc]==3m]
-    $initVar[user;3mCDc;1]
-    $setUserVar[3mval$getUserVar[3mCDc];$message[2]]
+    $initVar[user;CDc;1]
+    $setUserVar[cdval$getUserVar[CDc];$message[2]]
     $setUserVar[curbal;$sum[$getUserVar[curbal];-$message[2]]]
-    $setUserVar[3pt$getUserVar[3mCDc];$timestamp]
-    $setUserVar[3mCDc;$sum[$getUserVar[3mCDc];1]]
-    $sendMessage[Congratulations! You successfully purchased a 3-month CD with a 4.0% MPY for the price of $message[2]!
+    $setUserVar[3pt$getUserVar[CDc];$timestamp]
+    $sendMessage[Congratulations! You successfully purchased a 3-month CD with a 4.0% MPY for the price of $message[2]! This is your #$getUserVar[CDc] CD. You will need to use this number to withdraw your CD.
     
 To withdraw your CD, use the following command:
 
-!wcd]
+!cdw]
+    $setUserVar[CDc;$sum[$getUserVar[CDc];1]]
     $elseIf[$get[bc]==6m]
         $initVar[user;6mCDc;1]
-        $setUserVar[6mval$getUserVar[6mCDc];$message[2]]
+        $setUserVar[cdval$getUserVar[CDc];$message[2]]
         $setUserVar[curbal;$sum[$getUserVar[curbal];-$message[2]]]
-        $setUserVar[6pt$getUserVar[6mCDc];$timestamp]
-        $setUserVar[6mCDc;$sum[$getUserVar[6mCDc];1]]
-        $sendMessage[Congratulations! You successfully purchased a 3-month CD with a 5.0% MPY for the price of $message[2]!
+        $setUserVar[6pt$getUserVar[CDc];$timestamp]
+        $sendMessage[Congratulations! You successfully purchased a 6-month CD with a 5.0% MPY for the price of $message[2]! This is your #$getUserVar[CDc] CD. You will need to use this number to withdraw your CD.
         
 To withdraw your CD, use the following command:
 
-!withdrawcd]
+!cdwithdraw]
+        $setUserVar[CDc;$sum[$getUserVar[CDc];1]]
     $endelseif
 $endIf
 
