@@ -18,7 +18,7 @@ To withdraw your CD, use the following command:
 !cdw]
     $setUserVar[CDc;$sum[$getUserVar[CDc];1]]
     $elseIf[$get[bc]==6m]
-        $initVar[user;6mCDc;1]
+        $initVar[user;CDc;1]
         $setUserVar[cdval$getUserVar[CDc];$message[2]]
         $setUserVar[curbal;$sum[$getUserVar[curbal];-$message[2]]]
         $setUserVar[6pt$getUserVar[CDc];$timestamp]
