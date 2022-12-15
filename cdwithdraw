@@ -1,0 +1,12 @@
+$onlyIf[$isNumber[$message[2]]==true;Please provide the CD number you would wish to deposit. Like this:
+
+!cdw 3]
+$if[6pt$message[2]==undefined]
+    $onlyIf[$getUserVar[3pt$message[2]]!=undefined;Sorry, we can't seem to find that CD in our system. Please check the number and try again. Check your CD numbers with:
+
+!cdview]
+    $if[$timestamp<$sum[7889238000;$getUserVar[3pt$message[2]]]]
+        $let[bc;$awaitButton[Are you sure you want to withdraw this CD? You still have $humanizeMS[$sum[7889238000;$getUserVar[3pt$message[2]];-$timestamp];5;, ] left on your CD. Withdrawing early will break the CD and incur fees proportional to the amount you would have received with a minimum fee of 500 cave coins.{button:Yes:RED::y}{button:No:GREEN::n};;30s;y;n]]
+        $onlyIf[$get[bc]==y;Okay, have a nice day!]
+        
+        
