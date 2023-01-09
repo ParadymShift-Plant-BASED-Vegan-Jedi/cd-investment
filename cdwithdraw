@@ -7,6 +7,34 @@ $if[6pt$message[2]==undefined]
 !cdview]
     $if[$timestamp<$sum[7889238000;$getUserVar[3pt$message[2]]]]
         $let[bc;$awaitButton[Are you sure you want to withdraw this CD? You still have $humanizeMS[$sum[7889238000;$getUserVar[3pt$message[2]];-$timestamp];5;, ] left on your CD. Withdrawing early will break the CD and incur fees proportional to the amount you would have received with a minimum fee of 500 cave coins.{button:Yes:RED::y}{button:No:GREEN::n};;30s;y;n]]
-        $onlyIf[$get[bc]==y;Okay, have a nice day!]
-        
-        
+        $onlyIf[$get[bc]==y;Okay, have a nice day/night!]
+        $if[$timestamp<$sum[2629746000;$getUserVar[3pt$message[2]]]]
+            $let[fee;$multi[.12;$getUserVar[cdval$message[2]]]]
+            $if[$get[fee]<500]
+                $let[fee;500]
+            $endIf
+            $let[wa;$sum[-$get[fee];$getUserVar[cdval$message[2]]]]
+            $setUserVar[curbal;$sum[$getUserVar[curbal];$get[wa]]]
+            $setServerVar[jpot;$sum[$getServerVar[jpot];$get[fee]]]
+            $sendMessage[You've successfully withdrawn your #$message[2] CD with a value of $getUserVar[cdval$message[2]] and incurred $get[fee] in fees.]
+            $elseIf[$timestamp<5259492000&&$timestamp>2629745999]
+                $let[fee;$multi[.08;$getUserVar[cdval$message[2]]]
+                $if[$get[fee]<500]
+                    $let[fee;500]
+                $endIf
+                $let[wa;$sum[-$get[fee];$multi[.04;$getUserVar[cdval$message[2]]];$getUserVar[cdval$messgae[2]]]]
+                $setUserVar[curbal;$sum[$getUserVar[curbal];$get[wa]]]
+                $setServerVar[jpot;$sum[$getServerVar[jpot];$get[fee]]]
+                $sendMessage[You've successfully withdrawn your #$message[2] CD with a value of $getUserVar[cdval$message[2]] and incurred $get[fee] in fees.]
+            $endelseif
+            $elseIf[$timestamp>5259491999]
+                $let[fee;$multi[.04;$getUserVar[cdval$message[2]]]
+                $if[$get[fee]<500]
+                    $let[fee;500]
+                $endIf
+                $let[wa;$sum[-$get[fee];$multi[.08;$getUserVar[cdval$message[2]]];$getUserVar[cdval$message[2]]]]
+                $setUserVar[curbal;$sum[$getUserVar[curbal];$get[wa]]]
+                $setServerVar[jpot;$sum[$getServerVar[jpot];$get[fee]]]
+                $sendMessage[You've successfully withdrawn your #$message[2] CD with a value of $getUserVar[cdval$message[2]] and incurred $get[fee] in fees.]
+            $endelseif
+            
