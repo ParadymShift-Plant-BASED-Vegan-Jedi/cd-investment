@@ -5,6 +5,7 @@ $onlyIf[$isNumber[$message[2]]==true;Please provide the number of cave coins you
 $onlyIf[$sum[$getUserVar[curbal];-$message[2]]>-1;Sorry, you dont seem to have that many cave coins to invest in a CD. Check your balance with:
 
 !balance]
+$onlyIf[$message[2]>499;Sorry, you must spend a minimum of 500 cave coins per CD with no maximum.]
 $let[bc;$awaitButton[Which CD would you like to buy? We have a 3-month CD with a 4.0% Monthly Percentage Yield (MPY) or a 6-month CD with a 5.0% MPY.{button:3-Month CD, 4.0% MPY:GREEN::3m}{button:6-Month CD, 5.0% MPY:BLUE::6m};;30s;3m;6m]]
 $if[$get[bc]==3m]
     $initVar[user;CDc;1]
